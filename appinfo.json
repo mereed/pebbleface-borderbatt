@@ -1,0 +1,23 @@
+{
+    "appKeys": {
+        "bluetoothvibe": 1,
+        "hourlyvibe": 2,
+        "invert": 0
+    },
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "mreed",
+    "longName": "border time",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "shortName": "border time",
+    "uuid": "52d80d08-d27b-4538-9917-8dad9964edb5",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
