@@ -204,7 +204,6 @@ static const GPathInfo BATT100 = {
   }
 };
 
-
 static void path_layer_update_callback(Layer *me, GContext *ctx) {
   (void)me;
 	if (outline_mode) {
@@ -259,7 +258,6 @@ static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tup
 
 void update_battery_state(BatteryChargeState charge_state) {
 	
-
     static char battery_text[] = "x100%";
 
 	  if (charge_state.is_charging) {
@@ -308,20 +306,17 @@ void update_battery_state(BatteryChargeState charge_state) {
 		
     } 
     charge_percent = charge_state.charge_percent;
-    
     text_layer_set_text(battery_text_layer, battery_text);
-	
 	
 	if (charge_state.is_charging) {
         layer_set_hidden(text_layer_get_layer(battery_text_layer), false);
 	}      	
 } 
 
-
 static void toggle_bluetooth(bool connected) {
     if (appStarted && !connected && bluetoothvibe) {
 	  
-	static char bt_text[] = "xxx xxxxxxxxx";
+		static char bt_text[] = "xxx xxxxxxxxx";
 	  
 	    snprintf(bt_text, sizeof(bt_text), "NOT Connected");
 	    text_layer_set_text(layer_bt_text, bt_text);
@@ -330,7 +325,7 @@ static void toggle_bluetooth(bool connected) {
     vibes_long_pulse();
 	
     } else {
-			static char bt_text[] = "xxx xxxxxxxxx";
+		static char bt_text[] = "xxx xxxxxxxxx";
 
         snprintf(bt_text, sizeof(bt_text), "Connected");
         text_layer_set_text(layer_bt_text, bt_text);
@@ -344,7 +339,7 @@ void bluetooth_connection_callback(bool connected) {
 void update_time(struct tm *tick_time) {
 
 	static char time_text[] = "00:00";
-    static char date_text[] = "00xx xx XXXXXXXXX";
+    static char date_text[] = "00xx xx xxxxxxxxx";
     static char wday_text[] = "xxxxxxxxx";
 
     char *time_format;
@@ -358,15 +353,15 @@ void update_time(struct tm *tick_time) {
     case 1 :
     case 21 :
     case 31 :
-      strftime(date_text, sizeof(date_text), "%est of %b", tick_time);
+      strftime(date_text, sizeof(date_text), "%est of %B", tick_time);
       break;
     case 2 :
     case 22 :
-      strftime(date_text, sizeof(date_text), "%end of %b", tick_time);
+      strftime(date_text, sizeof(date_text), "%end of %B", tick_time);
       break;
     case 3 :
     case 23 :
-      strftime(date_text, sizeof(date_text), "%erd of %b", tick_time);
+      strftime(date_text, sizeof(date_text), "%erd of %B", tick_time);
       break;
     default :
       strftime(date_text, sizeof(date_text), "%eth of %B", tick_time);
@@ -376,7 +371,6 @@ void update_time(struct tm *tick_time) {
             text_layer_set_text(layer_wday_text, wday_text);
 		
         	text_layer_set_text(layer_date_text, date_text);
-		
 		
     }
 
@@ -443,25 +437,23 @@ void handle_init(void) {
  
     window_layer = window_get_root_layer(window);
 
-  GRect bounds = layer_get_frame(window_layer);
-  path_layer = layer_create(bounds);
-  layer_set_update_proc(path_layer, path_layer_update_callback);
-  layer_add_child(window_layer, path_layer);
+    GRect bounds = layer_get_frame(window_layer);
+    path_layer = layer_create(bounds);
+    layer_set_update_proc(path_layer, path_layer_update_callback);
+    layer_add_child(window_layer, path_layer);
 
-  // Pass the corresponding GPathInfo to initialize a GPath
-  batt10 = gpath_create(&BATT10);
-  batt20 = gpath_create(&BATT20);
-  batt30 = gpath_create(&BATT30);
-  batt40 = gpath_create(&BATT40);
-  batt50 = gpath_create(&BATT50);
-  batt60 = gpath_create(&BATT60);
-  batt70 = gpath_create(&BATT70);
-  batt80 = gpath_create(&BATT80);
-  batt90 = gpath_create(&BATT90);
-  batt100 = gpath_create(&BATT100);
+    // Pass the corresponding GPathInfo to initialize a GPath
+    batt10 = gpath_create(&BATT10);
+    batt20 = gpath_create(&BATT20);
+    batt30 = gpath_create(&BATT30);
+    batt40 = gpath_create(&BATT40);
+    batt50 = gpath_create(&BATT50);
+    batt60 = gpath_create(&BATT60);
+    batt70 = gpath_create(&BATT70);
+    batt80 = gpath_create(&BATT80);
+    batt90 = gpath_create(&BATT90);
+    batt100 = gpath_create(&BATT100);
   
-	// resources
-
     // layer position and alignment
 	
     layer_time_text = text_layer_create(GRect(0, 55, 144, 50));
@@ -474,7 +466,6 @@ void handle_init(void) {
     text_layer_set_font(layer_date_text, fonts_get_system_font(FONT_KEY_GOTHIC_14));
     text_layer_set_background_color(layer_time_text, GColorClear);
     text_layer_set_font(layer_time_text, fonts_get_system_font(FONT_KEY_BITHAM_42_MEDIUM_NUMBERS));
-//    text_layer_set_font(layer_time_text, fonts_get_system_font(FONT_KEY_ROBOTO_BOLD_SUBSET_49));
     text_layer_set_background_color(battery_text_layer, GColorClear);
     text_layer_set_font(battery_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
 	text_layer_set_background_color(layer_bt_text, GColorClear);
@@ -533,16 +524,16 @@ void handle_deinit(void) {
   text_layer_destroy( battery_text_layer );
   text_layer_destroy( layer_bt_text );
 		
-	  gpath_destroy(batt10);
-	  gpath_destroy(batt20);
-	  gpath_destroy(batt30);
-	  gpath_destroy(batt40);
-	  gpath_destroy(batt50);
-	  gpath_destroy(batt60);
-	  gpath_destroy(batt70);
-	  gpath_destroy(batt80);
-	  gpath_destroy(batt90);
-	  gpath_destroy(batt100);
+  gpath_destroy(batt10);
+  gpath_destroy(batt20);
+  gpath_destroy(batt30);
+  gpath_destroy(batt40);
+  gpath_destroy(batt50);
+  gpath_destroy(batt60);
+  gpath_destroy(batt70);
+  gpath_destroy(batt80);
+  gpath_destroy(batt90);
+  gpath_destroy(batt100);
 
   layer_destroy(path_layer);
 

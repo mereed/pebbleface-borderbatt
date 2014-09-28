@@ -8,12 +8,12 @@
         "configurable"
     ],
     "companyName": "mreed",
-    "longName": "border time",
+    "longName": "border battery",
     "projectType": "native",
     "resources": {
         "media": []
     },
-    "shortName": "border time",
+    "shortName": "border battery",
     "uuid": "52d80d08-d27b-4538-9917-8dad9964edb5",
     "versionCode": 1,
     "versionLabel": "1.0",
